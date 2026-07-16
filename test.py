@@ -6,3 +6,6 @@ def division (a, b):
         print(Erreur: impossible de diviser un nombre par 0 ou par un nombre negatif)
     else :
         return (a / b)
+
+def soustraction (a, b) :
+    return (a - b)
