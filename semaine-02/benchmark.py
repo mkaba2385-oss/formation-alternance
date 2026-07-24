@@ -5,6 +5,14 @@ import matplotlib.pyplot as plt
 MAX_N_BUBBLE = 10000 
 
 def bubble_sort(numbers):
+    """Trie une liste de nombres en utilisant l'algorithme du tri à bulles.
+
+    Args:
+        numbers (iterable): Une séquence de nombres (liste, tuple, etc.) à trier.
+
+    Returns:
+        list: Une nouvelle liste contenant les éléments triés par ordre croissant.
+    """
     data_to_sort = list(numbers)
     length = len(data_to_sort)
     for i in range(length):
@@ -14,6 +22,20 @@ def bubble_sort(numbers):
     return data_to_sort
 
 def benchmark():
+    """Mesure les temps d'exécution de diverses opérations et algorithmes Python.
+
+    Évalue des opérations courantes (recherche, insertion, tri, itération) sur
+    différentes tailles de structures de données afin de comparer leurs complexités
+    temporelles théoriques et pratiques.
+
+    Returns:
+        tuple[list[int], dict[str, list[float | None]]]: 
+            Un tuple contenant :
+            - Une liste des tailles d'échantillons testées (n).
+            - Un dictionnaire dont les clés sont les noms des opérations et les
+              valeurs sont des listes contenant le temps moyen d'exécution (en secondes)
+              pour chaque taille (ou None si l'opération a été omise).
+    """
     sizes = [100, 1000, 10000, 100000]
     
     results = {
@@ -95,6 +117,19 @@ def benchmark():
     return sizes, results
 
 def show_results(sizes, results):
+    """Affiche les résultats des benchmarks sous la forme d'un tableau formaté dans la console.
+
+    Formatte les durées automatiquement en microsecondes (µs), millisecondes (ms) ou 
+    secondes (s) selon l'ordre de grandeur.
+
+    Args:
+        sizes (list[int]): Liste des tailles de données testées (ex: [100, 1000, ...]).
+        results (dict[str, list[float | None]]): Dictionnaire associant chaque nom d'opération 
+            à sa liste de temps d'exécution.
+
+    Returns:
+        None
+    """
     header = f"{'Opération':<22} | " + " | ".join([f"N={size:<8}" for size in sizes])
     print("-" * len(header))
     print(header)
@@ -115,6 +150,19 @@ def show_results(sizes, results):
     print("-" * len(header))
 
 def plot_results(sizes, results):
+    """Génère et affiche des graphiques comparatifs des temps d'exécution.
+
+    Crée une grille de 2x2 sous-graphiques matplotlib comparant deux à deux
+    des opérations similaires pour mettre en évidence les différences de complexité
+    algorithmique (ex: O(1) vs O(n), O(n log n) vs O(n²)).
+
+    Args:
+        sizes (list[int]): Liste des tailles de données (axe X).
+        results (dict[str, list[float | None]]): Dictionnaire des temps d'exécution (axe Y).
+
+    Returns:
+        None
+    """
     fig, axes = plt.subplots(2, 2, figsize=(12, 10))
     fig.suptitle("Prouver les complexités algorithmiques théoriques", fontsize=14, fontweight='bold')
 
