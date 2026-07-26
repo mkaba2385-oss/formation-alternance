@@ -6,6 +6,7 @@ API_KEY = os.getenv("OPENWEATHER_API_KEY")
 BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
 
 def get_weather(city: str) -> None :
+    
     if not API_KEY :
         print ("Erreur : La variable d'environnement OPENWEATHER_API_KEY est introuvable sur ton système.", file= sys.stderr)
         sys.exit(1)
