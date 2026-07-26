@@ -1,7 +1,7 @@
 from unittest.mock import MagicMock, patch
 import pytest
 
-# On importe les fonctions et la constante CACHE_DIR du script
+# On importe les fonctions et la constante CACHE_DIR du scripts
 from scripts.service_enrichi import (
     CACHE_DIR,
     fetch_all,
@@ -13,7 +13,6 @@ from scripts.service_enrichi import (
 
 @pytest.fixture
 def mock_apis():
-    """Fixture Pytest qui mocke les appels HTTP vers les 3 APIs (Météo, Heure, Citation)."""
 
     def mock_httpx_get(url, *args, **kwargs):
         mock_response = MagicMock()
