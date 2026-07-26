@@ -147,6 +147,7 @@ class LRUCache:
             O(1)
         """
         if key in self.cache:
+            node = self.cache[key]
             node.value = value
             self._move_to_head(node)
         else:
