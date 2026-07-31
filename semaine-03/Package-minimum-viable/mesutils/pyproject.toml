@@ -1,0 +1,19 @@
+[project]
+name = "mesutils"
+version = "0.1.0"
+description = "Petit package Python contenant des fonctions utilitaires."
+authors = [
+    { name = "Moussa Kaba", email = "mkaba2385@gmail.com" }
+]
+requires-python = ">=3.11"
+
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0"
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
