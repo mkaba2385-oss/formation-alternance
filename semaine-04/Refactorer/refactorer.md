@@ -59,9 +59,9 @@ Elle ne contient aucune logique spécifique à une technologie particulière.
 
 Le refactoring répond aux objectifs de l'exercice :
 
-- ✔ séparation du code en plusieurs classes spécialisées ;
-- ✔ utilisation d'interfaces pour les dépendances externes ;
-- ✔ création d'un orchestrateur simple ;
-- ✔ respect des cinq principes **SOLID**.
+- séparation du code en plusieurs classes spécialisées ;
+- utilisation d'interfaces pour les dépendances externes ;
+- création d'un orchestrateur simple ;
+- respect des cinq principes **SOLID**.
 
 **Le code complet est disponible dans le fichier `refactorer.py`.**
