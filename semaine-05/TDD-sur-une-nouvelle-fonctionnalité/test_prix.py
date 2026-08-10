@@ -1,12 +1,5 @@
 from datetime import date, timedelta
-from dataclasses import dataclass
-
-
-@dataclass
-class RelevePrix:
-    produit: str
-    prix: float
-    date_releve: date
+from calcul_prix import RelevePrix, calculer_prix_moyen_30j
 
 
 def test_calculer_prix_moyen_30j_succes():
