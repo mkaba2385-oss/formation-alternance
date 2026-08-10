@@ -14,3 +14,7 @@ def test_calculer_prix_moyen_30j_succes():
     resultat = calculer_prix_moyen_30j(releves, produit="Maïs", date_reference=aujourdhui)
 
     assert resultat == 150.0
+
+def test_calculer_prix_moyen_30j_liste_vide():
+    aujourdhui = date(2026, 8, 10)
+    assert calculer_prix_moyen_30j([], produit="Maïs", date_reference=aujourdhui) == 0.0
