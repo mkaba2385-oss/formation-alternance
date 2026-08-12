@@ -17,5 +17,6 @@ def timer(func: F) -> F:
         result = func(*args, **kwargs)
         elapsed = time.perf_counter() - start
         logger.debug(f"[PERF] {func.__name__} a pris {elapsed:.6f}s")
+        return result
         
     return wrapper
