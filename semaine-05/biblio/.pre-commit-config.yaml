@@ -1,0 +1,30 @@
+repos:
+  - repo: local
+    hooks:
+      - id: ruff
+        name: ruff check
+        entry: ruff check semaine-05/biblio/src semaine-05/biblio/tests
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      - id: ruff-format
+        name: ruff format
+        entry: ruff format --check semaine-05/biblio/src semaine-05/biblio/tests
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      - id: mypy
+        name: mypy
+        entry: mypy semaine-05/biblio/src semaine-05/biblio/tests
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      - id: pytest
+        name: pytest
+        entry: pytest semaine-05/biblio/tests
+        language: system
+        pass_filenames: false
+        always_run: true
