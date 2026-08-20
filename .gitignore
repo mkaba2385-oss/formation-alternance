@@ -5,3 +5,4 @@ __pycache__/
 .coverage
 projet-fil-rouge
 biblio
+*.db
