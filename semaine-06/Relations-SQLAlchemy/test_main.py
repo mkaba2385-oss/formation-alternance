@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, event
+from sqlalchemy import create_engine, event, inspect
 from sqlalchemy.orm import Session
 
 from main import (
@@ -51,3 +51,19 @@ def test_display_uses_one_query(
     assert "Victor Hugo: 1 reviews positives" in captured.out
 
     assert query_count == 0
+
+def test_books_has_isbn_column() -> None:
+    engine = create_engine("sqlite:///:memory:")
+
+    Base.metadata.create_all(engine)
+
+    inspector = inspect(engine)
+
+    columns = inspector.get_columns("books")
+
+    column_names = [
+        column["name"]
+        for column in columns
+    ]
+
+    assert "isbn" in column_names

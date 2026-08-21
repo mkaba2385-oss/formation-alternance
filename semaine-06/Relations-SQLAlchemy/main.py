@@ -15,11 +15,31 @@ def create_data(session: Session) -> None:
     ]
 
     books = [
-        Book(title="1984", author=authors[0]),
-        Book(title="Animal Farm", author=authors[0]),
-        Book(title="Harry Potter 1", author=authors[1]),
-        Book(title="Harry Potter 2", author=authors[1]),
-        Book(title="Les Miserables", author=authors[2]),
+    Book(
+        title="1984",
+        isbn="9780451524935",
+        author=authors[0],
+    ),
+    Book(
+        title="Animal Farm",
+        isbn="9780451526342",
+        author=authors[0],
+    ),
+    Book(
+        title="Harry Potter 1",
+        isbn="9780747532699",
+        author=authors[1],
+    ),
+    Book(
+        title="Harry Potter 2",
+        isbn="9780747538493",
+        author=authors[1],
+    ),
+    Book(
+        title="Les Miserables",
+        isbn="9782253096334",
+        author=authors[2],
+    ),
     ]
 
     reviews = [
@@ -66,8 +86,8 @@ def display_positive_reviews(authors: list[Author]) -> None:
 
 
 def main() -> None:
-    Base.metadata.drop_all(engine)
-    Base.metadata.create_all(engine)
+    #Base.metadata.drop_all(engine)
+    #Base.metadata.create_all(engine)
 
     with Session(engine) as session:
         create_data(session)
