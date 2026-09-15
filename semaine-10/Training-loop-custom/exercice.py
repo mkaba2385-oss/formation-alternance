@@ -19,7 +19,7 @@ class Config:
     batch_size: int = 32
     accumulation_steps: int = 4
     epochs: int = 80
-    learning_rate: float = 1e-3
+    learning_rate: float = 1e-2
     weight_decay: float = 1e-4
     clip_grad_norm: float = 1.0
     patience: int = 10
@@ -110,10 +110,14 @@ def custom_collate(
     }
 
 
+print("1. Création du dataset")
+
 dataset = ToyRegressionDataset(
     n_samples=CFG.n_samples,
     seed=CFG.seed,
 )
+
+print("2. Split du dataset")
 
 val_size = int(
     len(dataset) * CFG.val_ratio
@@ -131,6 +135,8 @@ train_dataset, val_dataset = random_split(
     generator=split_generator,
 )
 
+print("3. Création du DataLoader train")
+
 train_loader = DataLoader(
     train_dataset,
     batch_size=CFG.batch_size,
@@ -139,6 +145,8 @@ train_loader = DataLoader(
     pin_memory=torch.cuda.is_available(),
     collate_fn=custom_collate,
 )
+
+print("4. Création du DataLoader validation")
 
 val_loader = DataLoader(
     val_dataset,
@@ -171,15 +179,24 @@ class MLPRegressor(nn.Module):
         return self.network(x)
 
 
+print("5. Création du modèle")
+
 model = MLPRegressor().to(DEVICE)
+
+print("6. Création de la fonction de perte")
 
 criterion = nn.MSELoss()
 
-optimizer = torch.optim.AdamW(
+print("7. Création de l'optimiseur")
+
+optimizer = torch.optim.SGD(
     model.parameters(),
     lr=CFG.learning_rate,
+    momentum=0.9,
     weight_decay=CFG.weight_decay,
 )
+
+print("8. Création du scheduler")
 
 scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
     optimizer,
@@ -189,9 +206,13 @@ scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
     min_lr=1e-6,
 )
 
+print("9. Création de TensorBoard")
+
 writer = SummaryWriter(
     log_dir=CFG.log_dir
 )
+
+print("10. Configuration TensorBoard")
 
 writer.add_text(
     "Configuration",
@@ -211,6 +232,8 @@ checkpoint_dir.mkdir(
 best_checkpoint = (
     checkpoint_dir / "best_model.pt"
 )
+
+print("11. Initialisation terminée")
 
 
 def train_one_epoch(
@@ -364,6 +387,9 @@ history = {
 }
 
 
+print("12. Début de l'entraînement")
+
+
 for epoch in range(
     1,
     CFG.epochs + 1,
@@ -429,10 +455,7 @@ for epoch in range(
         f"lr={current_lr:.2e}"
     )
 
-    if (
-        val_loss
-        < best_val_loss - CFG.min_delta
-    ):
+    if val_loss < best_val_loss - CFG.min_delta:
 
         best_val_loss = val_loss
 
@@ -462,10 +485,7 @@ for epoch in range(
             f"{CFG.patience}"
         )
 
-        if (
-            epochs_without_improvement
-            >= CFG.patience
-        ):
+        if epochs_without_improvement >= CFG.patience:
 
             print(
                 "Early stopping déclenché."
@@ -473,6 +493,8 @@ for epoch in range(
 
             break
 
+
+print("13. Chargement du meilleur modèle")
 
 checkpoint = torch.load(
     best_checkpoint,
