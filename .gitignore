@@ -7,3 +7,4 @@ projet-fil-rouge
 biblio
 *.db
 *.csv
+data/
