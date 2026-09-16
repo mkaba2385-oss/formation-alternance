@@ -1,0 +1,40 @@
+
+CONCLUSION — COMPARATIF ARCHITECTURES ET HYPERPARAMÈTRES
+
+Le dataset MNIST a été utilisé pour comparer quatre architectures :
+MLP shallow, MLP deep, LeNet-5 et MLP avec Dropout + BatchNorm.
+
+L'architecture ayant obtenu la meilleure validation accuracy lors de la
+comparaison est : LeNet-5.
+
+Sa meilleure validation accuracy est de 98.23%.
+Elle possède 44,426 paramètres et son temps moyen par epoch
+est de 16.36 secondes.
+
+Un grid search a ensuite été réalisé sur cette architecture avec :
+- batch size : 16, 32 et 128 ;
+- learning rate : 1e-2, 1e-3 et 1e-4 ;
+- optimizers : SGD et Adam.
+
+Cela représente 18 configurations.
+
+La meilleure configuration trouvée est :
+- batch size : 16;
+- learning rate : 0.001;
+- optimizer : Adam.
+
+Cette configuration obtient une validation accuracy de
+98.48% et une test accuracy de 98.48%.
+
+Cette expérience montre que les performances dépendent à la fois de
+l'architecture et des hyperparamètres. Le nombre de paramètres ne suffit
+pas à déterminer les performances : il faut également considérer la
+précision obtenue et le temps d'entraînement.
+
+Le learning rate influence directement la vitesse et la stabilité de
+l'apprentissage. Le batch size influence le nombre de mises à jour et le
+temps nécessaire pour parcourir le dataset. Le choix de l'optimizer
+influence également la convergence.
+
+Les résultats obtenus sont spécifiques à cette exécution et peuvent
+varier légèrement selon le matériel et l'initialisation du modèle.
